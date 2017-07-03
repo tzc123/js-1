@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script type="text/javascript">
+    /*作者：tzc
+     *时间：2017/7/3
+     *实现代理模式，在对象执行之前由其代理对象代理执行，实现深入的交互功能。
+    */
+    var Flower = function (type,prise,numb) {
+      this.type=type;
+      this.prise=prise;
+      this.numb=numb;
+      this.buy_flower=function () {
+        console.log("我要付"+this.numb*this.prise+"元");
+      }
+    };
+    var tzc = {
+      name: "tzc",
+      age: 20,
+      city: "ruichang",
+      send_flower: function (target) {
+        var flower = new Flower("rose",99,99);
+        target.receive_flower(this,flower);
+      }
+    }
+    var xiaohong = {
+      name: "xiaohong",
+      age: 18,
+      receive_flower: function (sender,flower) {
+        console.log("收到了"+sender.name+"送的"+flower.numb+"朵"+flower.type);
+      },
+      listenGoodmood:function (fn) {
+        console.log("心情不好");
+        setTimeout(function () {
+          console.log("心情好了，该约的约");
+          fn();
+        }, 5000);
+      }
+    }
+    var xiaomei = {
+      name: "xiaomei",
+      nickname: "songhuashizhe",
+      //接口
+      receive_flower: function (sender) {
+        xiaohong.listenGoodmood(function (){
+          xiaohong.receive_flower(sender,flower);
+        });
+      }
+    }
+    var flower = new Flower("rose",99,99);
+    console.log("我买了"+flower.type);
+    flower.buy_flower();
+    tzc.send_flower(xiaomei);
+  </script>
+</body>
+</html>
