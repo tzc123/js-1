@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<script>
+    function Player (name,color) {
+      this.name = name;
+      this.color = null;
+      this.enemies = [];
+      this.partenrs = [];
+      this.isdie = false;
+    }
+    Player.prototype.die = function () {
+      // 我死了队友没死，游戏继续
+      console.log(this.name+"我挂了");
+      this.isdie = true;
+      var allDead = 0
+      for(var i = 0;i<this.partenrs.length;i++){
+        if(partenrs[i].isdie == true){
+          allDead = false;
+          break;
+        }
+      }
+      if(allDead == true){
+        for(var i = 0;i<this.partenrs.length;i++){
+          this.partenrs[i].lose();
+          this.enemies[i].win();
+        }
+    }
+      // 我死了队友死了，游戏结束
+    }
+    Player.prototype.lose = function () {
+      console.log(this.name+"输了");
+    }
+    Player.prototype.win = function () {
+      console.log(this.name+"赢了");
+    }
+    var players = [];
+  </script>
+</body>
+</html>
