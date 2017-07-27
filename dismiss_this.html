@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>消失的this</title>
+</head>
+<body>
+<script>
+  var obj = {
+    myName: 'sven',
+    getName: function () {
+      console.log(this);
+      return this.myName
+    }
+  }
+  // 做为对象的方法调用
+  console.log(obj.getName());//sven
+  var getName2 = obj.getName;
+  console.log(getName2());//undifined
+  var func =function (a,b,c) {
+    alert([a,b,c]);
+  }
+  // 区别只在参数
+  func.apply(null,[1,2,3]);
+  func.call(null,1,2,3);
+</script>
+</body>
+</html>

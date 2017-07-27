@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div class="div1">我是一个div</div>
+<script>
+  // var getId = function (id) {
+  //   return document.getElementById(id)
+  // }
+  // 闭包 闭合空间 函数内部还有函数 运行时侯还保持对创建是的变量的引用
+  document.getElementById = (function(func){
+    return function () {
+      console.log(this);
+      return func.apply(document,arguments)
+    }
+  })(document.getElementById);
+  var getId = document.getElementById;
+  getId();
+</script>
+</body>
+</html>
