@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style media="screen">
+    .loginLayer{
+      position: absolute;
+      left: 0;
+      top: 300px;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0,0,0,.5);
+      color: #fff;
+      text-align: center;
+      display: -webkit-flex;
+      display: -ms-flex;
+      display: flex;
+      -ms-align-items: center;
+      align-items: center;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body>
+  <!-- <div>保证一个类只有一个实例，并提供一个访问它的全局访问点，window 对象</div> -->
+  <button id="loginBtn">登录</button>
+</body>
+<script>
+var createLoginLayer =  (function () {
+  var div;
+  return function (){
+    if(!div){
+      div = document.createElement('div');
+      div.className = 'loginLayer';
+      div.innerHTML = '登录窗口';
+      div.style.display = 'none';
+      document.body.appendChild(div);
+  }
+  return div;
+}
+})()
+ document.getElementById('loginBtn').addEventListener('click',function(){
+    createLoginLayer().style.display = 'block';
+ },false);
+
+var Singleton = function (name){
+  this.name = name;
+}
+Singleton.prototype.getName = function () {
+  alert(this.name);
+}
+Singleton.getInstance = (function () {
+  var instance = null;
+    return function (name) {
+      if(!instance){
+        instance = new Singleton(name);
+      }
+      return instance;
+    }
+  }());
+</script>
+</html>
