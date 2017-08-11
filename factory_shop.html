@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>factory_shop</title>
+</head>
+<body>
+<script>
+  class Bicycleshop {
+    constructor() {
+
+    }
+    sellBicycle() {
+      var bicycle = this.createBicycle()
+      bicycle.wash()
+      bicycle.assemble()
+      return bicycle
+    }
+    createBicycle() {
+      throw new Error('不要在抽象类里执行方法')
+
+    }
+  }
+
+  class GientBicycleShop extends Bicycleshop {
+    constructor() {
+      super()
+    }
+    createBicycle(model) {
+      var bicycle
+      switch (model) {
+        case "Gient hy":
+          bicycle = new GientHy()
+        break
+        case "Gient yl"
+          bicycle = new GientYl()
+        break
+      }
+    }
+  }
+
+  class GientYl () {
+    constructor() {
+
+    }
+    wash() {
+
+    }
+    assemble() {
+
+    }
+    ride() {
+
+    }
+    repair() {
+
+    }
+  }
+  // var Bicycle = new InterFace("Bicycle",["assemble","wash","ride","repair"])
+</script>
+</body>
+</html>
