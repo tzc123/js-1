@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>type 类型判断</title>
+</head>
+<body>
+  <script>
+  var TypeUtil = {
+      isArray: function (arr) {
+          if (
+          // 严格的得到更细的类型值
+          Object.prototype.toString.call(arr)
+           == '[object Array]'
+          ) {
+          return true;
+      }
+      return false;
+      }
+  }
+  TypeUtil.isArray([1,2,3]);
+  TypeUtil.isArray('abc');
+
+</body>
+</html>
