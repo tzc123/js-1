@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+  class EventEmitter {
+    /**请补充你的代码***/
+    constructor () {
+      this.func = {}
+    }
+    on(e, fn) {
+      this.func[e] = fn
+    }
+    fire(e, sb) {
+      if (this.func[e]) {
+        this.func[e](sb)
+      }
+    }
+    once(e,fn){
+      var once = (sb) => {
+        fn(sb)
+        this.off(e)
+      }
+      this.func[e] = once
+    }
+    off(e){
+      delete this.func[e]
+    }
+  }
+  const event = new EventEmitter()
+  const drank = (person) => {
+    console.log(person + '喝水')
+  }
+  event.on('drank', drank)
+  event.on('eat', (person) => {
+    console.log(person + '吃东西')
+  })
+  event.once('buy', (person) => {
+    console.log(person + '买东西')
+  })
+  event.fire('drank', '我')   // 我喝水
+  event.fire('drank', '我')   // 我喝水
+  event.fire('eat', '其它人')   // 其它人吃东西
+  event.fire('eat', '其它人')   // 其它人吃东西
+  event.fire('buy', '其它人')  //其它人买东西
+  event.fire('buy', '其它人')  //这里不会再次触发buy事件，因为once只能触发一次
+  event.off('eat')  //移除eat事件
+  event.fire('eat', '其它人')  //
+  </script>
+</body>
+</html>

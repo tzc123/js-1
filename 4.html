@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // function Promise (fn) {
+    //   var i
+    //   this.thenFns = []
+    //   var resolve = (msg) => {
+    //     i = msg
+    //     this.thenFns.forEach((thenFn,index) => {
+    //       if (i instanceof Promise) {
+    //         i = this.thenFns.splice(index)
+    //       }
+    //       i = thenFn(i)
+    //     })
+    //   }
+    //   var reject = (err) => {
+    //     throw new Error(err)
+    //   }
+    //   this.then = function(thenFn = function(){}) {
+    //     this.thenFns.push(thenFn)
+    //     return this
+    //   }
+    //   fn(resolve,reject)
+    // }
+    var p = new Promise((res,rej) => {
+      setTimeout(() => {
+        console.log(1);
+        res()
+      },1000)
+    })
+    p.then(() => {
+        console.log(2);
+        return new Promise((res,rej) => {
+          setTimeout(function () {
+            res(3)
+          }, 1000);
+        })
+    }).then((a) => {
+      console.log(a);
+    }).then(() => {
+      console.log(4);
+    }).then(() => {
+      console.log(5);
+      return 100
+    })
+  </script>
+</body>
+</html>
