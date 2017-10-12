@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<script>
+function Stack() {
+  var items = []
+  function push(item) {
+    items.push(item)
+  }
+  function pop() {
+    return items.pop()
+  }
+  function peek() {
+    return items[items.length-1]
+  }
+  function isEmpty() {
+    return items.length == 0
+  }
+  function size() {
+    return items.length
+  }
+  function clear() {
+    items = []
+  }
+  function print() {
+    console.log(items);
+  }
+  return { push, pop, peek, isEmpty, size, clear, print }
+}
+function toBinary(numb,base) {
+  var stack = Stack()
+  var str = ''
+  var digits = "0123456789ABCDEF"
+  while(numb>0){
+    stack.push(digits[numb%base])
+    numb = Math.floor(numb/base)
+  }
+  while (!stack.isEmpty()) {
+    str += stack.pop()
+  }
+  console.log(str);
+}
+toBinary(100345,16)
+</script>
+</body>
+</html>

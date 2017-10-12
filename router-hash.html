@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>路由hash</title>
+</head>
+<body>
+	<script>
+		class Router {
+			constructor () {
+				this.routes = {}
+				window.addEventListener('hashchange', this.resolve.bind(this))
+			}
+			resolve() {
+				var hash = location.hash
+				var callback = this.routes[hash];
+				typeof callback === 'function' && callback()
+			}
+			route(path,callback) {
+				this.routes[path] = callback
+			}
+		}
+		const router = new Router()
+		router.route('#path',() => {
+			console.log('#path')
+		})
+	</script>
+</body>
+</html>

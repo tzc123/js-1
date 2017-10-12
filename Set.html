@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Set</title>
+</head>
+<body>
+  <script>
+    function Set() {
+      var items = {}
+      this.has = function (value) {
+        return items.hasOwnProperty(value)
+      }
+
+      this.add = function (value) {
+        if (!this.has(value)) {
+          items[value] = value
+          return true
+        }
+        return false
+      }
+
+      this.remove = function (value) {
+        if (this.has(value)) {
+          delete items[value]
+          return true
+        }
+        return false
+      }
+
+      this.clear = function () {
+        items = {}
+      }
+
+      this.size = function () {
+        return Object.keys(items).length
+      }
+
+      this.values = function () {
+        return Object.values(items)
+      }
+
+      this.union = function (otherSet) {
+        var unionSet = new Set()
+        for (var i = 0; i < this.size(); i++) {
+          unionSet.add(this.values()[i])
+        }
+        for (var j = 0; j < otherSet.size(); j++) {
+          if (!unionSet.has(otherSet.values()[j])) {
+            unionSet.add(otherSet.values()[j])
+          }
+        }
+        return unionSet
+      }
+
+      this.intersection = function (otherSet) {
+        var intersectionSet = new Set()
+        var values = otherSet.values()
+        for (var i = 0; i < values.length; i++) {
+          if (this.has(values[i])) {
+            intersectionSet.add(values[i])
+          }
+        }
+        return intersectionSet
+      }
+
+      this.diffenrece = function (otherSet) {
+        var diffenreceSet = new Set()
+        var values = otherSet.values()
+        for (var i = 0; i < this.size(); i++) {
+          diffenreceSet.add(this.values()[i])
+        }
+        for (var j = 0; j < values.length; j++) {
+          if (diffenreceSet.has(values[j])) {
+            diffenreceSet.remove(values[j])
+          }
+        }
+        return diffenreceSet
+      }
+
+      this.subset = function (otherSet) {
+        var values = this.values()
+        return values.every( value => {
+          return otherSet.has(value)
+        })
+      }
+    }
+    var setA = new Set()
+    setA.add(1)
+    setA.add(2)
+    setA.add(3)
+    console.log(setA.values());
+    var setB = new Set()
+    setB.add(2)
+    setB.add(3)
+    setB.add(4)
+    console.log(setB.values())
+    var setAB = setA.union(setB)
+    console.log(setAB.values())
+    setAB = setA.intersection(setB)
+    console.log(setAB.values());
+    setAB = setA.diffenrece(setB)
+    console.log(setAB.values());
+    console.log(setAB.subset(setA));
+  </script>
+</body>
+</html>

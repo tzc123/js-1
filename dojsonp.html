@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		function getData(url) {
+			return new Promise((resolve, reject) => {
+				var sc = document.createElement('script')
+				sc.src = url + '?callback=doSomething'
+				document.body.appendChild(sc)
+				setTimeout(() => {
+					reject('超时了')
+				}, 5000)
+				function doSomething() {
+					if (arguments.length === 0) {
+						reject('失败了')
+					} else {
+						resolve(Array.from(arguments))
+					}
+				}
+			})
+		}	
+	</script>
+</body>
+</html>

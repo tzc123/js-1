@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+</head>
+<div id = "div">123</div>
+<body>
+	<script>
+		function setStyle (el,styleChange) {
+			if (!styleChange) return
+			for (key of Object.keys(styleChange)) {
+				el.style[key] = styleChange[key]
+			}
+		}
+		let div1 = document.getElementById("div")
+		setStyle(div1,{
+			fontWeight: "blod",
+			textDecoration: "none",
+			color: "red"
+		})
+		function getArgs (str) {
+			var newStr = str.substring(str.indexOf("?"))
+			var arr = newStr.split("&")
+			arr.shift()
+			var obj = {}
+			arr.forEach(item => {
+				var val = item.split("=")
+				obj[val[0]] = val[1]
+			})
+			return obj
+		}
+	</script>
+</body>
+</html>

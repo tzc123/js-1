@@ -14,7 +14,7 @@
           setTimeout(function () {
             fn()
             timeout()
-          }, 1000)
+          }, time)
         }
         timeout()
       })()
@@ -23,7 +23,7 @@
     foo(() => {
       if(i>5) return
       console.log(i++);
-    })
+    },1000)
   </script>
 </body>
 </html>

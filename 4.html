@@ -8,27 +8,29 @@
 </head>
 <body>
   <script>
-    // function Promise (fn) {
-    //   var i
-    //   this.thenFns = []
-    //   var resolve = (msg) => {
-    //     i = msg
-    //     this.thenFns.forEach((thenFn,index) => {
-    //       if (i instanceof Promise) {
-    //         i = this.thenFns.splice(index)
-    //       }
-    //       i = thenFn(i)
-    //     })
-    //   }
-    //   var reject = (err) => {
-    //     throw new Error(err)
-    //   }
-    //   this.then = function(thenFn = function(){}) {
-    //     this.thenFns.push(thenFn)
-    //     return this
-    //   }
-    //   fn(resolve,reject)
-    // }
+    function Promise (fn) {
+      var i
+      this.thenFns = []
+      var resolve = (msg) => {
+        setImmediate(() => {
+          i = msg
+          this.thenFns.forEach((thenFn, index) => {
+            // if (i instanceof Promise) {
+            //   i = this.thenFns.splice(index)
+            // }
+            i = thenFn(i)
+          })
+        })
+      }
+      var reject = (err) => {
+        throw new Error(err)
+      }
+      this.then = function(thenFn = function(){}) {
+        this.thenFns.push(thenFn)
+        return this
+      }
+      fn(resolve,reject)
+    }
     var p = new Promise((res,rej) => {
       setTimeout(() => {
         console.log(1);
